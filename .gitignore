@@ -1,0 +1,17 @@
+venv/
+
+.ipynb_checkpoints/
+
+__pycache__/
+*.pyc
+*.pyo
+
+Thumbs.db
+
+.vscode/
+.idea/
+
+*.log
+
+*.tar.gz
+*.egg-info/
