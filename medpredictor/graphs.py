@@ -54,6 +54,7 @@ def hist_plot_sns(self, x, data, **kwargs):
           data=data, 
           x=x, 
           kde=kwargs.get('kde', False),
-          bins=kwargs.get('bins', 50)
+          bins=kwargs.get('bins', 50),
+          color=self.colors if self.colors != None else None
           )
      return
