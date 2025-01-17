@@ -50,6 +50,9 @@ This method creates an histogram with its features
 """
 @graph_decorator
 def hist_plot_sns(self, x, data, **kwargs):
+    if (type(self.colors) != 'str') or (type(self.colors) != 'NoneType'):
+         raise TypeError(f'Type: {type(self.colors)} not supported') 
+    else:  
      sns.histplot(
           data=data, 
           x=x, 
