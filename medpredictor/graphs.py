@@ -13,16 +13,14 @@ class Graph:
         self.graph_title = graph_title
         self.xlabel_name = xlabel_name
         self.ylabel_name = ylabel_name
-        return
     
 """
 This method set up the config for a graph
 """
-@staticmethod
 def graph_decorator(func):
-        def wrapper(*args, **kwargs):
+        def wrapper(self, *args, **kwargs):
             plt.figure(figsize=(Graph.width, Graph.height))
-            result = func(*args, **kwargs)
+            result = func(self, *args, **kwargs)
             plt.title(kwargs.get('graph_title', ''), fontsize=Graph.title_font_size)
             plt.xlabel(kwargs.get('xlabel_name', ''), fontsize=Graph.xlabel_font_size)
             plt.ylabel(kwargs.get('ylabel_name', ''), fontsize=Graph.ylabel_font_size)
@@ -35,7 +33,7 @@ def graph_decorator(func):
 This method creates a bar plot with its features
 """
 @graph_decorator
-def bar_plot_sns(x, y, data,**kwargs):
+def bar_plot_sns(self, x, y, data,**kwargs):
     sns.barplot(
     x=x,
     y=y,
@@ -43,7 +41,7 @@ def bar_plot_sns(x, y, data,**kwargs):
     hue_order=kwargs.get('order', None),
     legend= False,
     data=data,
-    palette=kwargs.get('palette', 'muted'),
+    palette=self.colors if self.colors != None else 'muted',
     edgecolor=kwargs.get('edgecolor', 'black'))
     return
 
@@ -51,7 +49,7 @@ def bar_plot_sns(x, y, data,**kwargs):
 This method creates an histogram with its features
 """
 @graph_decorator
-def hist_plot_sns(x, data, **kwargs):
+def hist_plot_sns(self, x, data, **kwargs):
      sns.histplot(
           data=data, 
           x=x, 
