@@ -3,6 +3,9 @@ class Utils:
     def __init__(self):
         pass
 
+    """
+    This methods calculate percentajes
+    """
     def calc_percentajes(self, value, total):
         return (value*100)/total if (total > 0) else 0
     
