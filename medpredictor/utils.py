@@ -6,6 +6,7 @@ class Utils:
     def calc_percentajes(self, value, total):
         return (value*100)/total if (total > 0) else 0
     
+    
     """
     This method labels person's eating habits having regard his/her survey's answers
     Parameters
