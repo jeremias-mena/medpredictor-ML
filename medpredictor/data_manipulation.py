@@ -26,6 +26,13 @@ class DataFrameOperations:
     def create_column_from_function(self, new_column_name, column_apply_function, function):
         self.df[new_column_name] = self.df[column_apply_function].apply(function)
         return self.df
+    
+    def filter_group_registers(self, column_1, column_2, condition):
+        group = self.df.groupby([column_1, column_2]).size().reset_index(name='count')
+        total_registers = group['count'].sum()
 
+        results = {'result':group.loc[condition, 'count'].sum(), 'total_registers':total_registers} 
+        
+        return results
     
 
