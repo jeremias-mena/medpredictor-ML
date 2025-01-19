@@ -7,9 +7,9 @@ class DataFrameOperations:
         self.df = df
         pass
 
-    def create_combined_column(self, new_column_name, column_1, column_2,criterion):
+    def create_combined_column(self, new_column_name, column_1, column_2, criterion):
         self.df[new_column_name] = [criterion(value_1, value_2) for value_1, value_2 in zip(self.df[column_1], self.df[column_2])]
-        return
+        return 
     
     def column_identifier(self, column_1, column_2, values_subset):
         column_1_values = self.df[column_1].unique()
@@ -22,7 +22,10 @@ class DataFrameOperations:
         else:
             raise ValueError("Cannot identify columns properly.")
         return variable_column, filter_column
-  
+    
+    def create_column_from_function(self, new_column_name, column_apply_function, function):
+        self.df[new_column_name] = self.df[column_apply_function].apply(function)
+        return self.df
 
     
 
