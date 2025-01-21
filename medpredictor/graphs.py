@@ -21,9 +21,9 @@ class Graph:
             def wrapper(self, *args, **kwargs):
                 plt.figure(figsize=(Graph.width, Graph.height))
                 result = func(self, *args, **kwargs)
-                plt.title(kwargs.get('graph_title', ''), fontsize=Graph.title_font_size)
-                plt.xlabel(kwargs.get('xlabel_name', ''), fontsize=Graph.xlabel_font_size)
-                plt.ylabel(kwargs.get('ylabel_name', ''), fontsize=Graph.ylabel_font_size)
+                plt.title(self.graph_title, fontsize=Graph.title_font_size)
+                plt.xlabel(self.xlabel_name, fontsize=Graph.xlabel_font_size)
+                plt.ylabel(self.ylabel_name, fontsize=Graph.ylabel_font_size)
                 plt.tight_layout()
                 plt.show()
                 return result
