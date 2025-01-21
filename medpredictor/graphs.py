@@ -10,7 +10,7 @@ class Graph:
     ylabel_font_size = 15
 
     def __init__(self, colors, graph_title, xlabel_name, ylabel_name):
-        self.colors = colors
+        self.colors = colors if colors != None else None 
         self.graph_title = graph_title
         self.xlabel_name = xlabel_name
         self.ylabel_name = ylabel_name
