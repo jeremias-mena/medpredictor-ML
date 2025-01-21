@@ -11,9 +11,9 @@ class Graph:
 
     def __init__(self, colors, graph_title, xlabel_name, ylabel_name):
         self.colors = colors if colors != None else None 
-        self.graph_title = graph_title
-        self.xlabel_name = xlabel_name
-        self.ylabel_name = ylabel_name
+        self.graph_title = graph_title if graph_title != None else ''
+        self.xlabel_name = xlabel_name if xlabel_name != None else ''
+        self.ylabel_name = ylabel_name if ylabel_name != None else ''
     
     def set_graph_colors(self, x, palette):
         if type(x) != 'list':
