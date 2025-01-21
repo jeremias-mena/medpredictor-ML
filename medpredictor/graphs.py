@@ -50,7 +50,7 @@ class Graph:
     """
     @graph_decorator
     def hist_plot_sns(self, x, data, **kwargs):
-        if (type(self.colors) != 'str') and (type(self.colors) != 'NoneType'):
+        if (type(self.colors) != 'str'):
             raise TypeError(f'Type: {type(self.colors)} not supported') 
         else:  
             sns.histplot(
