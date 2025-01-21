@@ -37,7 +37,7 @@ class Graph:
         sns.barplot(
         x=x,
         y=y,
-        hue=kwargs.get('hue', ''),
+        hue=kwargs.get('hue', None),
         hue_order=kwargs.get('order', None),
         legend= False,
         data=data,
