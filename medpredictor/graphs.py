@@ -1,6 +1,5 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 
 class Graph:
     width = 15
