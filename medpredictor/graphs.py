@@ -1,5 +1,6 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 
 class Graph:
     width = 15
@@ -14,6 +15,16 @@ class Graph:
         self.xlabel_name = xlabel_name
         self.ylabel_name = ylabel_name
     
+    def set_graph_colors(self, x, palette):
+        if type(x) != 'list':
+            raise TypeError('x must be list type')
+        cmap = plt.get_cmap(palette if palette != None else 'viridis', len(x))
+        hex_colors = [mcolors.to_hex(cmap(i)) for i in range(len(x))]
+        dict_colors = dict(zip(x, hex_colors))
+        self.colors = list(dict_colors.values())
+        return self.colors
+         
+
     """
     This method set up the config for a graph
     """
