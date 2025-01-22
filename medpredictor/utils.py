@@ -34,13 +34,13 @@ class Utils:
     """    
     def bad_habits_labeling(value_a, value_t):
         if (value_a == 'Yes') & (value_t == 'Yes'):
-            return 'Consume alcohol and tobacco'
+            return 'Uses alcohol and tobacco'
         elif (value_a == 'Yes') & (value_t == 'No'):
-            return 'Only consume alcohol'
+            return 'Only consumes alcohol'
         elif (value_a == 'No') & (value_t == 'Yes'):
-            return 'Only consume tobacco'
+            return 'Only uses tobacco'
         else:
-            return 'Does not consume alcohol neither tobacco'
+            return 'Does not use alcohol neither tobacco'
 
     """
     This method assigns a label taking into account the age range of the person.
