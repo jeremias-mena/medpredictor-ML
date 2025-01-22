@@ -7,7 +7,7 @@ class Utils:
     This methods calculate percentajes
     """
     def calc_percentajes(self, value, total):
-        return (value*100)/total if (total > 0) else 0
+        return ( value * 100 ) / total if (total > 0) else 0
     
     
     """

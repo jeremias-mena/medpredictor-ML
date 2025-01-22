@@ -7,8 +7,8 @@ class DataFrameOperations:
         self.df = df
         pass
 
-    def create_combined_column(self, new_column_name, column_1, column_2, criterion):
-        self.df[new_column_name] = [criterion(value_1, value_2) for value_1, value_2 in zip(self.df[column_1], self.df[column_2])]
+    def create_combined_column(self, new_column_name, column_1, column_2, function):
+        self.df[new_column_name] = [function(value_1, value_2) for value_1, value_2 in zip(self.df[column_1], self.df[column_2])]
         return self.df
     
     def column_identifier(self, column_1, column_2, values_subset):
@@ -28,11 +28,14 @@ class DataFrameOperations:
         return self.df
     
     def filter_group_registers(self, column_1, column_2, condition):
-        group = self.df.groupby([column_1, column_2]).size().reset_index(name='count')
-        total_registers = group['count'].sum()
-
-        results = {'result':group.loc[condition, 'count'].sum(), 'total_registers':total_registers} 
         
-        return results
+        filtered_df = self.df[condition]
+
+        group = filtered_df.groupby([column_1, column_2]).size().reset_index(name='count')
+
+        result = group['count'].sum() if not group.empty else 0
+        result_filter = {'result':result} 
+        
+        return result_filter
     
 
