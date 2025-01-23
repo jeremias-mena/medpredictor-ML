@@ -16,7 +16,7 @@ class Utils:
     value f = answer to the question Consume Fruit 1 or more times per day
     value v = answer to the question Consume Vegetables 1 or more times per day
     """
-    def good_habits_labeling(value_f, value_v):
+    def good_habits_labeling(self, value_f, value_v):
         if (value_f == 'Yes') & (value_v == 'Yes'):
             return 'Eats fruits and vegetables'
         elif (value_f == 'Yes') & (value_v == 'No'):
@@ -32,7 +32,7 @@ class Utils:
     value a = answer to the question Do you have X drinks per week? (adult men >= 14 drinks per week and adult women >= 7 drinks per week)
     value t = answer to the question Have you smoked at least 100 cigarettes in your entire life? 
     """    
-    def bad_habits_labeling(value_a, value_t):
+    def bad_habits_labeling(self, value_a, value_t):
         if (value_a == 'Yes') & (value_t == 'Yes'):
             return 'Uses alcohol and tobacco'
         elif (value_a == 'Yes') & (value_t == 'No'):
@@ -47,7 +47,7 @@ class Utils:
     Parameters
     answer = person's age is between x and y.
     """    
-    def age_range_labeling(answer):
+    def age_range_labeling(self, answer):
         if answer in ['18 to 24']:
             return 'Young'
         elif answer in ['25 to 29', '30 to 34', '35 to 39']:
