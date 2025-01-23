@@ -40,7 +40,7 @@ class Graph:
         hue=kwargs.get('hue', None),
         hue_order=kwargs.get('hue_order', None),
         order=kwargs.get('order', None),
-        legend= False,
+        legend= kwargs.get('legend', False),
         data=data,
         palette=self.colors if self.colors != None else 'muted',
         edgecolor=kwargs.get('edgecolor', 'black'))
