@@ -5,8 +5,7 @@ from .utils import Utils
 from .graphs import Graph
 
 __all__ = ['Config', 
-           'MetricsDisplay', 
            'Utils', 
            'Graph', 
-           'DataFrameOperation'
+           'DataFrameOperations'
            ] 
