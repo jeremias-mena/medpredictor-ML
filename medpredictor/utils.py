@@ -1,5 +1,60 @@
 class Utils:
+    values_age_order = ['18 to 24','25 to 29', '30 to 34', '35 to 39',
+                '40 to 44', '45 to 49', '50 to 54', '55 to 59',
+                '60 to 64', '65 to 69', '70 to 74', '75 to 79', '80 or older']
+
+    values_income_order = ['Less than $10,000', 
+                '$10k to less than $15k', 
+                '$15k to less than $20k', 
+                '$20k to less than $25k',
+                '$25k to less than $35k', 
+                '$35k to less than $50k', 
+                '$50k to less than $75k', 
+                '$75,000 or more']
     
+    values_education_order = ['Never attended school or only kindergarten',
+                   'Elementary',
+                   'Some high school',
+                   'High school graduate', 
+                   'Some college or technical school',
+                   'College graduate']
+    values_sex_order = ["Female", "Male"]
+
+
+    values_eh_order = ["Eats fruits and vegetables", 
+                   "Only eats fruits", 
+                   "Only eats vegetables", 
+                   "Does not eat fruits neither vegetables"]
+
+    values_bh_order = ["Uses alcohol and tobacco", 
+                   "Only consumes alcohol", 
+                   "Only uses tobacco", 
+                   "Does not use alcohol neither tobacco"]
+
+    values_status_order = ['Excellent',
+                'Very good',
+                'Good',
+                'Fair',
+                'Poor']
+
+    dict_colors_status = {'Excellent':'#1976D2',
+               'Very good':'#388E3C',
+               'Good':'#FBC02D',
+               'Fair': '#F57C00',
+               'Poor': '#D32F2F'}
+
+    answer_filter_order = ['Yes', 'No']
+
+    values_diabetes_order = ['No diabetes',
+                         'Prediabetes',
+                         'Diabetes']
+
+    values_age_range_order = ['Young',
+                          'Young adulthood',
+                          'Middle adulthood',
+                          'Late adulthood',
+                          'Old age']
+     
     def __init__(self):
         pass
 
