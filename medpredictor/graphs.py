@@ -62,3 +62,17 @@ class Graph:
                 color=self.colors
                 )
         return
+
+    @graph_decorator
+    def heatmap_plot_sns(self, data, xticklabels, yticklabels, **kwargs):
+         if (type(self.colors) != str):
+              raise TypeError(f'Type {type(self.colors)} not supported')
+         else:
+            sns.heatmap(data=data,
+                     xticklabels=xticklabels,
+                     yticklabels=yticklabels,
+                     annot=kwargs.get('annot',True),
+                     fmt=kwargs.get('fmt', 'd'),
+                     cmap=self.colors
+                     )
+         return
