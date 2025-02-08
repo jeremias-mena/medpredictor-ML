@@ -9,7 +9,7 @@ class Encoder():
         scaler = RobustScaler()
         df_num = pd.DataFrame(columns=columns_name)
         for column in columns_name:
-            df_num[column] = scaler.fit_transform(df[[column]])
+            df_num[column] = scaler.fit_transform(df[[column]]).ravel()
         return df_num 
     
     def label_encoder_method(self, df, column_name):
