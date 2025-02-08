@@ -18,8 +18,8 @@ class Utils:
                    'High school graduate', 
                    'Some college or technical school',
                    'College graduate']
+    
     values_sex_order = ["Female", "Male"]
-
 
     values_eh_order = ["Eats fruits and vegetables", 
                    "Only eats fruits", 
