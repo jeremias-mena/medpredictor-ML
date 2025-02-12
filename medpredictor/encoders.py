@@ -22,7 +22,7 @@ class Encoder():
         enc = OrdinalEncoder(categories=[order])
         enc_data = enc.fit_transform(df[[column_name]])
         dec_data = enc.inverse_transform(enc_data)
-        return enc_data, dec_data
+        return enc_data.ravel(), dec_data.ravel()
     
     
     
