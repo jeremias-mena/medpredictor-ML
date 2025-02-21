@@ -12,10 +12,10 @@ class AnswersDB(models.Model):
     answers_diab = {'No diabetes': 'No diabetes',
                     'Prediabetes': 'Pre diabetes',
                     'Diabetes': 'Diabetes'}
-    diabetes = models.CharField(verbose_name='Diabetes', max_length=1, choices=answers_diab)
-    heartattack = models.CharField(verbose_name='Heart attack', max_length=1, choices=answers_yn)
-    stroke = models.CharField(verbose_name='Stroke', max_length=1, choices=answers_yn)
-    veggie = models.CharField(verbose_name='Veggie', max_length=1, choices=answers_yn)
-    fruits = models.CharField(verbose_name='Fruits', max_length=1, choices=answers_yn)
-    smoker = models.CharField(verbose_name='Smoker', max_length=1, choices=answers_yn)
-    alcohol = models.CharField(verbose_name='Heavy alcohol consume', max_length=1, choices=answers_yn) 
+    diabetes = models.CharField(verbose_name='Diabetes', max_length=20, choices=answers_diab)
+    heartattack = models.CharField(verbose_name='Heart attack', max_length=3, choices=answers_yn)
+    stroke = models.CharField(verbose_name='Stroke', max_length=3, choices=answers_yn)
+    veggie = models.CharField(verbose_name='Veggie', max_length=3, choices=answers_yn)
+    fruits = models.CharField(verbose_name='Fruits', max_length=3, choices=answers_yn)
+    smoker = models.CharField(verbose_name='Smoker', max_length=3, choices=answers_yn)
+    alcohol = models.CharField(verbose_name='Heavy alcohol consume', max_length=3, choices=answers_yn) 
