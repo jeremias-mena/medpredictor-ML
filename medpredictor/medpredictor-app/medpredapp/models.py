@@ -25,6 +25,11 @@ class AnswersDB(models.Model):
     physact = models.CharField(verbose_name="Physical activity", max_length=3, choices=answers_yn, null=False, blank=False)
     healtstatus = models.CharField(verbose_name="General health status", max_length=10, choices=answers_status, null=False, blank=False)
 
+    class Meta:
+        db_table = "Answers"
+        verbose_name = "Answer"
+        verbose_name_plural ="Answers"
+
 class UserDB(models.Model):
     sex = {'Male': 'Male',
            'Female': 'Female'}
@@ -35,3 +40,8 @@ class UserDB(models.Model):
     birth_date = models.DateField(verbose_name="Birth date", null=False, blank=False)
     email = models.EmailField(verbose_name="Email", null=False, blank=False)
     form_answers = models.ForeignKey(AnswersDB, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "Users"
+        verbose_name = "User"
+        verbose_name_plural ="Users"
