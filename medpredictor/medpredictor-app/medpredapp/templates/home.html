@@ -11,8 +11,21 @@
 <body class="flex items-center justify-center min-h-screen bg-white" style="height: 100%;">
     <div class="bg-black text-white border-2 px-5 py-3 rounded-xl flex flex-col gap-y-5 w-3/4 md:w-1/2 max-w-md box-border">
         <h1 class="text-center text-3xl">Welcome to Medpredictor App!</h1>
-        <p class="text-justify"></p>
-        <button class="p-2 px-10 border-2 mx-auto hover:bg-green-600 hover:text-gray-200 hover:border-white border-gray-200 rounded">Begin</button>
+        <p class="text-justify">
+            This app implements machine learning models to predict the likelihood of having diabetes, 
+            as well as stroke and heart attack, based on your demographics, habits and physical conditions.
+        </p>
+        <div class="flex justify-center items-center">
+            <div class="bg-yellow-500 text-white border-2 border-white px-8 py-2 rounded-md text-center text-sm w-fit">
+                Warning
+            </div>
+        </div>
+        <p class="text-center">
+            This project is purely practical and should not be taken as a real diagnosis.
+        </p>  
+        <a href="{% url 'register_user' %}" class="p-2 px-10 border-2 mx-auto hover:bg-green-600 hover:text-gray-200 hover:border-white border-gray-200 rounded">
+        Begin
+        </a>
     </div>
 </body>
 </html>
