@@ -3,18 +3,12 @@ from django.db import models
 class AnswersDB(models.Model):
     answers_yn = {'Yes': 'Yes',
                   'No': 'No'}
-    answers_diab = {'No diabetes': 'No diabetes',
-                    'Prediabetes': 'Pre diabetes',
-                    'Diabetes': 'Diabetes'}
     answers_status = {'Excellent': 'Excellent',
                       'Very good': 'Very good',
                       'Good': 'Good',
                       'Fair': 'Fair',
                       'Poor': 'Poor'}
     bmi = models.FloatField(verbose_name="Body mass index", null=False, blank=False)
-    diabetes = models.CharField(verbose_name="Diabetes", max_length=20, choices=answers_diab, null=False, blank=False)
-    heartattack = models.CharField(verbose_name="Heart attack", max_length=3, choices=answers_yn, null=False, blank=False)
-    stroke = models.CharField(verbose_name="Stroke", max_length=3, choices=answers_yn, null=False, blank=False)
     veggie = models.CharField(verbose_name="Veggie", max_length=3, choices=answers_yn, null=False, blank=False)
     fruits = models.CharField(verbose_name="Fruits", max_length=3, choices=answers_yn, null=False, blank=False)
     smoker = models.CharField(verbose_name="Smoker", max_length=3, choices=answers_yn, null=False, blank=False)
@@ -45,3 +39,6 @@ class UserDB(models.Model):
         db_table = "Users"
         verbose_name = "User"
         verbose_name_plural ="Users"
+    
+    def __str__(self) -> str:
+        return self.first_name
