@@ -33,7 +33,7 @@ class UserDB(models.Model):
     age = models.CharField(verbose_name="Age", max_length=10, null=False, blank=False)
     birth_date = models.DateField(verbose_name="Birth date", null=False, blank=False)
     email = models.EmailField(verbose_name="Email", null=False, blank=False)
-    form_answers = models.ForeignKey(AnswersDB, on_delete=models.CASCADE)
+    form_answers = models.ForeignKey(AnswersDB, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         db_table = "Users"
