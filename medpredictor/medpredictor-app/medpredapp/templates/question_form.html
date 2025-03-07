@@ -4,11 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <title>Question form</title>
     <link rel="icon" type="image/x-icon" href="{% static 'images/medpredictor_icon.png' %}"> 
     
 </head>
-<body>
-  
+<body class="flex items-center justify-center min-h-screen bg-white" style="height: 100%;">
+    <form method="post" action="{% url 'register_answers' %}" class="flex border-2 gap-y-3 p-2 flex-col w-1/2 md:w-1/3 mx-auto bg-black rounded-xl">
+        {% csrf_token %}
+        <h1 class="font-bold text-center text-3xl text-white">Question registration</h1>
+
+        <div>
+            <label for="bmi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body mass index</label>
+            <input type="number" name="bmi" id="bmi" maxlength="2" class="block w-full p-2 text-black border border-gray-300 rounded-lg bg-white text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-black dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <label for="veggie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you consume vegetables one or more time per day?</label>
+        <select id="veggie" name="veggie" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="fruits" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you consume fruits one or more time per day?</label>
+        <select id="fruits" name="fruits" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="smoker" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Have you ever smoke at least 100 cigarettes in your entire life?</label>
+        <select id="smoker" name="smoker" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="alcohol" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you consume X drinks per week? (For adult men: X>=14. For adult women: X>=7)</label>
+        <select id="alcohol" name="alcohol" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="highbp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you have high blood pressure?</label>
+        <select id="highbp" name="highbp" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="highchol" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you have high cholesterol?</label>
+        <select id="highchol" name="highchol" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="diffwalk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you have serious difficulty walking?</label>
+        <select id="diffwalk" name="diffwalk" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="physact" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Have you been physically active in the last 30 days?</label>
+        <select id="physact" name="physact" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <label for="healtstatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Would you say that in general your health is:</label>
+        <select id="healtstatus" name="healtstatus" class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Excellent</option>
+          <option>Very good</option>
+          <option>Good</option>
+          <option>Fair</option>
+          <option>Poor</option>
+        </select>
+
+
+        <button type="submit" class="p-2 px-10 border-2 mx-auto bg-gray-200 hover:font-bold hover:bg-green-600 hover:text-gray-200 hover:border-white border-gray-200 rounded">
+          Submit
+        </button>
+      </form>
 </body>
 </html>
