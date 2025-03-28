@@ -1,6 +1,7 @@
 *.model/
 *.results/
 *.model-metrics/
+*.data_codified/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
