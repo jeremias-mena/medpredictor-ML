@@ -1,7 +1,6 @@
-*.models/
-*.results/
-*.model-metrics/
-*.data_codified/
+**/medpredictor/src/models/*
+**/medpredictor/model-metrics/*
+**/medpredictor/src/data_codified/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
