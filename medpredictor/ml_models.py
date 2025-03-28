@@ -1,4 +1,4 @@
-from medpredictor import Graph, Encoder, Config, Utils
+from medpredictor import Encoder, Config, Utils
 import pandas as pd
 from time import perf_counter
 from sklearn.neighbors import KNeighborsClassifier
