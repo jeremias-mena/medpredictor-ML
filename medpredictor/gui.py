@@ -1,9 +1,31 @@
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton
-import sys
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton
+from PySide6.QtGui import QIcon, QFont
+from PySide6.QtCore import Qt
 
-class MedPredictorSurveyApp(QWidget):
+class ResultsWindow(QWidget):
+     def __init__(self, results):
+        super().__init__()
+        self.setWindowTitle("Your Results")
+        self.setGeometry(150, 150, 400, 300)
+
+        layout = QVBoxLayout()
+
+        title = QLabel("Your Results")
+        title.setFont(QFont("Arial", 16, QFont.Bold))
+        title.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title)
+
+        for result in results:
+            label = QLabel(result)
+            label.setFont(QFont("Arial", 12))
+            label.setAlignment(Qt.AlignCenter)
+            layout.addWidget(label)
+
+        self.setLayout(layout)
+
+class SurveyWindow(QWidget):
     def __init__(self):
-        super().__init__
+        super().__init__()
         self.setWindowTitle("MedPredictor Survey")
         self.setGeometry(100, 100, 400, 500)
 
@@ -75,4 +97,51 @@ class MedPredictorSurveyApp(QWidget):
         self.bmi = float(self.bmi_input.text()) if self.bmi_input.text() else None
         self.answers = {key: combo.currentText() for key, combo in self.yn_inputs.items()}
         self.general_health = self.health_input.currentText()
-        
+
+class WelcomeWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Medpredictor App")
+        self.setGeometry(100, 100, 500, 400)
+        self.setWindowIcon(QIcon("icon.png"))
+
+        layout = QVBoxLayout()
+        layout.setAlignment(Qt.AlignCenter)
+
+        title = QLabel("Welcome to Medpredictor App!")
+        title.setFont(QFont("Arial", 18, QFont.Bold))
+        title.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title)
+
+        description = QLabel("""This app implements machine learning models to predict the likelihood of having diabetes,  
+            as well as stroke and heart attack, based on your demographics, habits, and physical conditions.""")
+        description.setFont(QFont("Arial", 12))
+        description.setAlignment(Qt.AlignCenter)
+        layout.addWidget(description)
+
+        warning_box = QLabel("Warning")
+        warning_box.setFont(QFont("Arial", 12, QFont.Bold))
+        warning_box.setStyleSheet("background-color: yellow; color: black; padding: 8px; border: 2px solid black; border-radius: 5px;")
+        warning_box.setAlignment(Qt.AlignCenter)
+        layout.addWidget(warning_box)
+
+        disclaimer = QLabel("This project is purely practical and should not be taken as a real diagnosis.")
+        disclaimer.setFont(QFont("Arial", 12))
+        disclaimer.setAlignment(Qt.AlignCenter)
+        layout.addWidget(disclaimer)
+
+        self.start_button = QPushButton("Begin")
+        self.start_button.setFont(QFont("Arial", 12, QFont.Bold))
+        self.start_button.setStyleSheet("background-color: green; color: white; padding: 8px; border: 2px solid white; border-radius: 5px;")
+        self.start_button.clicked.connect(self.start_survey)
+        layout.addWidget(self.start_button)
+
+        self.setLayout(layout)
+    
+    def start_survey(self):
+        self.survey_window = SurveyWindow()
+        self.survey_window.show()
+        self.close()
+   
+
+
