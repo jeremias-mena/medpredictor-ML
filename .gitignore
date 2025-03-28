@@ -1,4 +1,4 @@
-*.model/
+*.models/
 *.results/
 *.model-metrics/
 *.data_codified/
