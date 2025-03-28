@@ -1,4 +1,5 @@
 from pathlib import Path 
+import os
 
 class Config:
     data_dir_raw = Path(__file__).resolve().parent / 'data/raw'
@@ -10,5 +11,12 @@ class Config:
     data_processed_path = data_dir_processed/'diabetes_processed.csv'
     data_cleaned_path = data_dir_cleaned/'diabetes_cleaned.csv'
     model_metrics = model_dir_metrics/'model_metrics.csv'
+
+    def __init__(self):
+        pass
+    
+    def create_dir(self, dir_path: str) -> None:
+        if not os.path.exists(dir_path):
+            os.mkdir(dir_path)
 
 
