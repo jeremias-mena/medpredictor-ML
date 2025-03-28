@@ -1,7 +1,0 @@
-Hypotesis,Model,Train time (s),Predict time (s),Accuracy,Recall,Precision,F1-Score
-"How do a person's demographic characteristics, habits and physical conditions influence the likelihood of developing diabetes, according to the indicator recorded?",K-Nearest Neighbors,3.2304088000091724,22.81248599998071,74.77,74.77,79.55,76.94
-"How do a person's demographic characteristics, habits and physical conditions influence the likelihood of developing diabetes, according to the indicator recorded?",Random Forest,6.727727299992694,0.27324749997933395,70.27,70.27,82.5,75.12
-"How do a person's demographics, habits and physical conditions influence the likelihood of having a stroke?",K-Nearest Neighbors,2.474820200004615,26.052090599987423,88.32,27.28,11.29,15.97
-"How do a person's demographics, habits and physical conditions influence the likelihood of having a stroke?",Random Forest,5.895560100005241,0.32126939998124726,86.42,37.55,12.16,18.37
-"How do a person's demographics, habits and physical conditions influence the likelihood of having a heart attack?",K-Nearest Neighbors,2.276555999997072,23.54065849998733,83.24,40.33,25.15,30.98
-"How do a person's demographics, habits and physical conditions influence the likelihood of having a heart attack?",Random Forest,4.122666399984155,0.24625349999405444,79.77,60.86,25.5,35.94
