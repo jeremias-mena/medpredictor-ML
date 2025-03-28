@@ -59,14 +59,14 @@ df_enc = pd.concat(list(df_enc_dict.values()), axis=1)
 df_dec = pd.concat(list(df_dec_dict.values()), axis=1)
 
 # Set up the targets
-X_h1 = df_enc.drop(columns=['MentHlth', 'PhysHlth',
+X_h1 = df_enc.drop(columns=['MentHlth', 'PhysHlth', 'Stroke_enc', 'HeartDiseaseorAttack_enc',
                             'Diabetes_012_enc', 'CholCheck_enc',
                             'AnyHealthcare_enc', 'NoDocbcCost_enc',
                             'Education_enc', 'Income_enc' 
                             ])
 y_h1 = df_enc['Diabetes_012_enc']
 
-X_h2 = df_enc.drop(columns=['MentHlth', 'PhysHlth',
+X_h2 = df_enc.drop(columns=['MentHlth', 'PhysHlth', 'Diabetes_012_enc', 'HeartDiseaseorAttack_enc',
                             'Stroke_enc', 'AnyHealthcare_enc',
                             'NoDocbcCost_enc', 'Education_enc',
                             'Income_enc'])
