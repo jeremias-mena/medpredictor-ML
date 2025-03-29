@@ -8,5 +8,5 @@ __all__ = ['Config',
            'Utils', 
            'Graph', 
            'DataFrameOperations',
-           'Encoder'
+           'Encoder',
            ] 
