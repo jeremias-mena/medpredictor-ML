@@ -113,3 +113,31 @@ class Utils:
             return 'Late adulthood'
         else:
             return 'Old age'
+    
+    def transform_age(self, age):
+        if age >= 18 and age <= 24:
+            return '18 to 24'
+        elif age > 24 and age <= 29:
+            return '25 to 29'
+        elif age > 29 and age <= 34:
+            return '30 to 34'
+        elif age > 34 and age <= 39:
+            return '35 to 39'
+        elif age > 39 and age <= 44:
+            return '40 to 44'
+        elif age > 44 and age <= 49:
+            return '45 to 49'
+        elif age > 50 and age <= 54:
+            return '50 to 54'
+        elif age > 54 and age <= 59:
+            return '55 to 59'
+        elif age > 59 and age <= 64:
+            return '60 to 64'
+        elif age > 64 and age <= 69:
+            return '65 to 69'
+        elif age > 69 and age <= 74:
+            return '70 to 74'
+        elif age > 74 and age <= 79:
+            return '75 to 79'
+        else:
+            return '80 or older'
