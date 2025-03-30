@@ -43,7 +43,7 @@ def train_model_h2():
     df_enc = pd.read_csv(path_cod_data)
 
     X_h2 = df_enc.drop(columns=['MentHlth', 'PhysHlth', 'Diabetes_012_enc', 'HeartDiseaseorAttack_enc',
-                                'Stroke_enc', 'AnyHealthcare_enc',
+                                'Stroke_enc', 'AnyHealthcare_enc', 'CholCheck_enc',
                                 'NoDocbcCost_enc', 'Education_enc',
                                 'Income_enc'])
     y_h2 = df_enc['Stroke_enc']
@@ -74,7 +74,7 @@ def train_model_h3():
 
     X_h3 = df_enc.drop(columns=['MentHlth', 'PhysHlth',
                                 'HeartDiseaseorAttack_enc','AnyHealthcare_enc',
-                                'NoDocbcCost_enc', 'Education_enc',
+                                'NoDocbcCost_enc', 'Education_enc', 'CholCheck_enc',
                                 'Income_enc'])
     y_h3 = df_enc['HeartDiseaseorAttack_enc']
     
