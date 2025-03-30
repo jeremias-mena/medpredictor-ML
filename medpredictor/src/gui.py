@@ -76,15 +76,19 @@ class TrainingModelThread(QThread):
     finished = Signal()
 
     def run(self):
-        total_models = 3
         start_time = time.time()
         self.progress.emit(0)
+        for i in range(34):
+            self.msleep(100)
+            self.progress.emit(i)
         train.train_model_h1()
-        self.progress.emit(int((1 / total_models) * 100))
-        
+        for i in range(34, 67):
+            self.msleep(100)
+            self.progress.emit(i)
         train.train_model_h2()
-        self.progress.emit(int((2 / total_models) * 100))
-
+        for i in range(67, 100):
+            self.msleep(100)
+            self.progress.emit(i)
         train.train_model_h3()
         self.progress.emit(100)
         end_time = time.time()
@@ -235,7 +239,7 @@ class SurveyWindow(QWidget):
             "Age": int(self.age_input.text() if self.age_input.text().isdigit() else None),
             "Sex": self.sex_input.currentText(),
             "BMI": float(self.bmi_input.text()) if self.bmi_input.text() else None,
-            "Veggie": self.veggie_input.currentText(),
+            "Veggies": self.veggie_input.currentText(),
             "Fruits": self.fruits_input.currentText(),
             "Smoker": self.smoker_input.currentText(),
             "HvyAlcoholConsump": self.alcohol_input.currentText(),
