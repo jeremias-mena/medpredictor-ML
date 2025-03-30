@@ -22,7 +22,6 @@ def answers_encoder(df):
               'GenHlth': Utils.values_status_order
               }
 
-
     for column in df.columns:
         order = orders.get(column, None)
         if order is not None:
