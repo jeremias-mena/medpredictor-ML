@@ -11,7 +11,7 @@ def answers_encoder(df):
 
     orders = {'Age': Utils.values_age_order,
               'Sex': Utils.values_sex_order,
-              'Veggie': ["No", "Yes"],
+              'Veggies': ["No", "Yes"],
               'Fruits': ["No", "Yes"],
               'Smoker': ["No", "Yes"],
               'HvyAlcoholConsump': ["No", "Yes"],
@@ -31,7 +31,9 @@ def answers_encoder(df):
             df_enc_dict[column] = pd.DataFrame({column + '_enc': enc_})
             df_dec_dict[column] = pd.DataFrame({column + '_dec': dec_})
             continue
-    
+    df_enc_dict.update({"BMI": df["BMI"]})
+    df_dec_dict.update({"BMI": df["BMI"]})
+
     df_enc = pd.concat(list(df_enc_dict.values()), axis=1)
     df_dec = pd.concat(list(df_dec_dict.values()), axis=1)
     return df_enc, df_dec
@@ -81,18 +83,19 @@ def preprocess_answers(answers):
     answers_path = './src/answers'
     Config().create_dir(dir_path=answers_path)
     answers.update({"Age": Utils().transform_age(answers["Age"])})
-    df = pd.DataFrame({"Age": [answers["Age"]],
-            "Sex": [answers["Sex"]],
-            "BMI": [answers["BMI"]],
-            "Veggie": [answers["Veggie"]],
-            "Fruits": [answers["Fruits"]],
-            "Smoker": [answers["Smoker"]],
-            "HvyAlcoholConsump": [answers["HvyAlcoholConsump"]],
-            "HighBP": [answers["HighBP"]],
-            "HighChol": [answers["HighChol"]],
-            "DiffWalk": [answers["DiffWalk"]],
-            "PhysActivity": [answers["PhysActivity"]],
-            "GenHlth": [answers["GenHlth"]]})
+    df = pd.DataFrame({"HighBP": [answers["HighBP"]],
+                       "HighChol": [answers["HighChol"]],
+                       "Smoker": [answers["Smoker"]],
+                       "PhysActivity": [answers["PhysActivity"]],
+                       "Fruits": [answers["Fruits"]],
+                       "Veggies": [answers["Veggies"]],
+                       "HvyAlcoholConsump": [answers["HvyAlcoholConsump"]],
+                       "GenHlth": [answers["GenHlth"]],
+                       "DiffWalk": [answers["DiffWalk"]],
+                       "Sex": [answers["Sex"]],
+                       "Age": [answers["Age"]],
+                       "BMI": [answers["BMI"]]                    
+            })
     df_enc, df_dec = answers_encoder(df)
 
     df_enc.to_csv(answers_path + '/answers_codified.csv', index=False)
