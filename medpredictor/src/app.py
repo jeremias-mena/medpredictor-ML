@@ -1,11 +1,11 @@
 import sys
 from PySide6.QtWidgets import QApplication
-from gui import WelcomeWindow
+from gui import MedPredictorApp
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    welcome_window = WelcomeWindow()
-    welcome_window.show()
+    med_pred_app = MedPredictorApp()
+    med_pred_app.show()
     sys.exit(app.exec())
 
     
