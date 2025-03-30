@@ -11,7 +11,7 @@ def make_h1_prediction():
     
     y = pd.read_csv(path_survey_answers)
     diabetes = model_h1.predict(y)
-    return diabetes
+    return int(diabetes[0])
 
 def make_h2_prediction():
     path_survey_answers = './src/answers/answers_codified.csv'
@@ -22,7 +22,7 @@ def make_h2_prediction():
 
     y = pd.read_csv(path_survey_answers)
     stroke = model_h2.predict(y)
-    return stroke
+    return int(stroke[0])
 
 def make_h3_prediction():
     path_survey_answers = './src/answers/answers_codified.csv'
@@ -33,4 +33,4 @@ def make_h3_prediction():
     
     y = pd.read_csv(path_survey_answers)
     heart_attack = model_h3.predict(y)
-    return heart_attack
+    return int(heart_attack[0])
