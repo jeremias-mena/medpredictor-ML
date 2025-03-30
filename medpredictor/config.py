@@ -1,5 +1,6 @@
 from pathlib import Path 
 import os
+import re
 
 class Config:
     data_dir_raw = Path(__file__).resolve().parent / 'data/raw'
@@ -18,5 +19,8 @@ class Config:
     def create_dir(self, dir_path: str) -> None:
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
+
+    def check_files(self, path):
+        return any(re.search(r"\.pkl$", file) for file in os.listdir(path)) if os.path.exists(path) else False
 
 
