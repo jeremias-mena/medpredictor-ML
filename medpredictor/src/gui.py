@@ -1,7 +1,138 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton, QProgressBar
 from PySide6.QtGui import QIcon, QFont
-from PySide6.QtCore import Qt, Signal
+from PySide6.QtCore import Qt, Signal, QThread
+import time
+import os
 import preprocess
+import train
+
+class ProcessingDataThread(QThread):
+    progress = Signal(int)
+    finished = Signal()
+
+    def run(self):
+        not_created = True
+        for i in range(101):
+            self.progress.emit(i)
+            self.msleep(50)
+            if not_created:
+                start_time = time.time()
+                preprocess.preprocess_data()
+                end_time = time.time()
+                not_created = False
+        print(f"Time for data processing: {round(end_time - start_time, 2)} secs")
+        self.finished.emit()
+
+class ProcessingDataWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Processing data")
+        self.setGeometry(150, 150, 400, 200)
+        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+
+        layout = QVBoxLayout()
+
+        if not os.path.exists('./src/data_codified'): 
+            self.title_label = QLabel("Processing data...")
+            self.title_label.setAlignment(Qt.AlignCenter)
+            layout.addWidget(self.title_label)
+
+            self.progress_bar = QProgressBar()
+            self.progress_bar.setRange(0, 100)
+            self.progress_bar.setValue(0)
+            layout.addWidget(self.progress_bar)
+    
+
+            self.processing_data_thread = ProcessingDataThread()
+            self.processing_data_thread.progress.connect(self.update_progress)
+            self.processing_data_thread.finished.connect(lambda: self.update_title("Data processed!"))
+            self.processing_data_thread.finished.connect(self.close)
+            self.processing_data_thread.start()
+        else:
+            self.title_label = QLabel("Data already processed!")
+            self.title_label.setAlignment(Qt.AlignCenter)
+            layout.addWidget(self.title_label)
+            
+            self.progress_bar = QProgressBar()
+            self.progress_bar.setRange(0, 100)
+            self.progress_bar.setValue(100)
+            layout.addWidget(self.progress_bar)
+
+            self.train_models_button = QPushButton("Train models!")
+            layout.addWidget(self.train_models_button)
+
+        self.setLayout(layout)
+        
+    def update_progress(self, value):
+        self.progress_bar.setValue(value)
+    
+    def update_title(self, title):
+        self.title_label.setText(title)
+        self.setWindowTitle(title)
+
+class TrainingModelThread(QThread):
+    progress = Signal(int)
+    finished = Signal()
+
+    def run(self):
+        total_models = 3
+        start_time = time.time()
+        self.progress.emit(0)
+        train.train_model_h1()
+        self.progress.emit(int((1 / total_models) * 100))
+        
+        train.train_model_h2()
+        self.progress.emit(int((2 / total_models) * 100))
+
+        train.train_model_h3()
+        self.progress.emit(100)
+        end_time = time.time()
+        print(f"Time for training models: {round(end_time - start_time, 2)} secs")
+        self.finished.emit()
+
+class TrainingModelWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Training Model")
+        self.setGeometry(150, 150, 400, 200)
+        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+
+        layout = QVBoxLayout()
+        
+        if not os.path.exists('./src/models'):
+            self.title_label = QLabel("Training models...")
+            self.title_label.setAlignment(Qt.AlignCenter)
+            layout.addWidget(self.title_label)
+
+            self.progress_bar = QProgressBar()
+            self.progress_bar.setRange(0, 100)
+            self.progress_bar.setValue(0)
+            layout.addWidget(self.progress_bar)
+
+            self.training_model_thread = TrainingModelThread()
+            self.training_model_thread.progress.connect(self.update_progress)
+            self.training_model_thread.finished.connect(lambda: self.update_title("Training completed!"))
+            self.training_model_thread.finished.connect(self.close)
+            self.training_model_thread.start()
+        else:
+            self.title_label = QLabel("Training already done!")
+            self.title_label.setAlignment(Qt.AlignCenter)
+            layout.addWidget(self.title_label)
+            
+            self.progress_bar = QProgressBar()
+            self.progress_bar.setRange(0, 100)
+            self.progress_bar.setValue(100)
+            layout.addWidget(self.progress_bar)
+            
+
+        self.setLayout(layout)
+        
+    def update_progress(self, value):
+        self.progress_bar.setValue(value)
+    
+    def update_title(self, title):
+        self.title_label.setText(title)
+        self.setWindowTitle(title)
 
 class SurveyWindow(QWidget):
     answers_submitted = Signal(dict)
@@ -10,6 +141,7 @@ class SurveyWindow(QWidget):
         super().__init__()
         self.setWindowTitle("MedPredictor Survey")
         self.setGeometry(100, 100, 400, 500)
+        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
 
@@ -112,12 +244,12 @@ class SurveyWindow(QWidget):
         self.answers_submitted.emit(answers)
         self.close()
         
-class WelcomeWindow(QWidget):
+class MedPredictorApp(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Medpredictor App")
         self.setGeometry(100, 100, 500, 400)
-        self.setWindowIcon(QIcon("icon.png"))
+        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
@@ -152,12 +284,30 @@ class WelcomeWindow(QWidget):
 
         self.setLayout(layout)
     
+    def train_model(self):
+        if not hasattr(self, "training_model"):  
+            self.training_model = TrainingModelWindow()
+            self.training_model.show()
+
+    def start_training_model(self):
+        if not hasattr(self, "processing_data"):
+            self.processing_data = ProcessingDataWindow()
+            self.processing_data.show()
+            if hasattr(self.processing_data, "processing_data_thread"):
+                self.processing_data.processing_data_thread.finished.connect(self.train_model)
+            else:
+                self.processing_data.train_models_button.clicked.connect(self.train_model)
+                self.processing_data.train_models_button.clicked.connect(self.processing_data.close)
+                
+
     def start_survey(self):
         self.survey_window = SurveyWindow()
         self.survey_window.answers_submitted.connect(preprocess.preprocess_answers)
-        self.survey_window.answers_submitted.connect()
+        self.survey_window.answers_submitted.connect(self.start_training_model)
         self.survey_window.show()
         self.close()
+    
+   
         
    
 
