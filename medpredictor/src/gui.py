@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton, QProgressBar
 from PySide6.QtGui import QIcon, QFont
 from PySide6.QtCore import Qt, Signal, QThread
+from medpredictor import Config
 import time
 import os
 import preprocess
@@ -99,7 +100,7 @@ class TrainingModelWindow(QWidget):
 
         layout = QVBoxLayout()
         
-        if not os.path.exists('./src/models'):
+        if not Config().check_files(path='./src/models'):
             self.title_label = QLabel("Training models...")
             self.title_label.setAlignment(Qt.AlignCenter)
             layout.addWidget(self.title_label)
@@ -123,6 +124,9 @@ class TrainingModelWindow(QWidget):
             self.progress_bar.setRange(0, 100)
             self.progress_bar.setValue(100)
             layout.addWidget(self.progress_bar)
+
+            self.make_predictions_button = QPushButton("Make predictions")
+            layout.addWidget(self.make_predictions_button)
             
 
         self.setLayout(layout)
