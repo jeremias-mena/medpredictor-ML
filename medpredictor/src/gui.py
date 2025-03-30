@@ -6,6 +6,7 @@ import time
 import os
 import preprocess
 import train
+import predict
 
 class ProcessingDataThread(QThread):
     progress = Signal(int)
@@ -132,6 +133,63 @@ class TrainingModelWindow(QWidget):
             self.make_predictions_button = QPushButton("Make predictions")
             layout.addWidget(self.make_predictions_button)
             
+        self.setLayout(layout)
+        
+    def update_progress(self, value):
+        self.progress_bar.setValue(value)
+    
+    def update_title(self, title):
+        self.title_label.setText(title)
+        self.setWindowTitle(title)
+
+class ModelPredictionsThread(QThread):
+    progress = Signal(int)
+    finished = Signal(dict)
+
+    def run(self):
+        results = {}
+        start_time = time.time()
+        self.progress.emit(0)
+        for i in range(34):
+            self.msleep(100)
+            self.progress.emit(i)
+        results.update({"Diabetes": predict.make_h1_prediction()})
+        for i in range(34, 67):
+            self.msleep(100)
+            self.progress.emit(i)
+        results.update({"Stroke": predict.make_h2_prediction()})
+        for i in range(67, 101):
+            self.msleep(100)
+            self.progress.emit(i)
+        results.update({"Heart attack": predict.make_h3_prediction()})
+        end_time = time.time()
+        print(f"Time needed to make predictions: {round(end_time - start_time, 2)} secs")
+        self.finished.emit(results)
+
+class ModelPredictionsWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Making predictions")
+        self.setGeometry(150, 150, 400, 200)
+        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+
+        layout = QVBoxLayout()
+        
+        if Config().check_files(path='./src/models'):
+            self.title_label = QLabel("Making predictions...")
+            self.title_label.setAlignment(Qt.AlignCenter)
+            layout.addWidget(self.title_label)
+
+            self.progress_bar = QProgressBar()
+            self.progress_bar.setRange(0, 100)
+            self.progress_bar.setValue(0)
+            layout.addWidget(self.progress_bar)
+
+            self.model_predictions_thread = ModelPredictionsThread()
+            self.model_predictions_thread.progress.connect(self.update_progress)
+            self.model_predictions_thread.finished.connect(lambda: self.update_title("Predictions done!"))
+            self.model_predictions_thread.finished.connect(self.close)
+            self.model_predictions_thread.start()
 
         self.setLayout(layout)
         
@@ -292,10 +350,20 @@ class MedPredictorApp(QWidget):
 
         self.setLayout(layout)
     
+    def make_model_predictions(self):
+        if not hasattr(self, "model_predictions"):
+            self.model_predictions = ModelPredictionsWindow()
+            self.model_predictions.show()
+
     def train_model(self):
         if not hasattr(self, "training_model"):  
             self.training_model = TrainingModelWindow()
             self.training_model.show()
+            if hasattr(self.training_model, "training_model_thread"):
+                self.training_model.training_model_thread.finished.connect(self.make_model_predictions)
+            else:
+                self.training_model.make_predictions_button.clicked.connect(self.make_model_predictions)
+                self.training_model.make_predictions_button.clicked.connect(self.training_model.close)
 
     def start_training_model(self):
         if not hasattr(self, "processing_data"):
@@ -306,7 +374,6 @@ class MedPredictorApp(QWidget):
             else:
                 self.processing_data.train_models_button.clicked.connect(self.train_model)
                 self.processing_data.train_models_button.clicked.connect(self.processing_data.close)
-                
 
     def start_survey(self):
         self.survey_window = SurveyWindow()
