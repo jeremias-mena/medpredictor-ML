@@ -206,6 +206,7 @@ class ResultsWindow(QWidget):
 
         self.setWindowTitle("MedPredictor Results")
         self.setGeometry(150, 150, 400, 300)
+        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
 
