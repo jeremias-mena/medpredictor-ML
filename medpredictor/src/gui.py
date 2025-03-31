@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton, QProgressBar
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton, QProgressBar, QMessageBox
 from PySide6.QtGui import QIcon, QFont
 from PySide6.QtCore import Qt, Signal, QThread
 from medpredictor import Config
@@ -175,21 +175,20 @@ class ModelPredictionsWindow(QWidget):
 
         layout = QVBoxLayout()
         
-        if Config().check_files(path='./src/models'):
-            self.title_label = QLabel("Making predictions...")
-            self.title_label.setAlignment(Qt.AlignCenter)
-            layout.addWidget(self.title_label)
+        self.title_label = QLabel("Making predictions...")
+        self.title_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(self.title_label)
 
-            self.progress_bar = QProgressBar()
-            self.progress_bar.setRange(0, 100)
-            self.progress_bar.setValue(0)
-            layout.addWidget(self.progress_bar)
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setRange(0, 100)
+        self.progress_bar.setValue(0)
+        layout.addWidget(self.progress_bar)
 
-            self.model_predictions_thread = ModelPredictionsThread()
-            self.model_predictions_thread.progress.connect(self.update_progress)
-            self.model_predictions_thread.finished.connect(lambda: self.update_title("Predictions done!"))
-            self.model_predictions_thread.finished.connect(self.close)
-            self.model_predictions_thread.start()
+        self.model_predictions_thread = ModelPredictionsThread()
+        self.model_predictions_thread.progress.connect(self.update_progress)
+        self.model_predictions_thread.finished.connect(lambda: self.update_title("Predictions done!"))
+        self.model_predictions_thread.finished.connect(self.close)
+        self.model_predictions_thread.start()
 
         self.setLayout(layout)
         
@@ -199,6 +198,53 @@ class ModelPredictionsWindow(QWidget):
     def update_title(self, title):
         self.title_label.setText(title)
         self.setWindowTitle(title)
+
+class ResultsWindow(QWidget):
+    def __init__(self, results):
+        super().__init__()
+        self.results = results
+
+        self.setWindowTitle("MedPredictor Results")
+        self.setGeometry(150, 150, 400, 300)
+
+        layout = QVBoxLayout()
+
+        title = QLabel("Your Results")
+        title.setFont(QFont("Arial", 16, QFont.Bold))
+        title.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title)
+
+        if self.results["Diabetes"] == 0:
+            label_d = QLabel("Taking into account your answers, you won't have diabetes")
+        elif self.results["Diabetes"] == 1:
+            label_d = QLabel("Taking into account your answers, you  will have prediabetes")
+        else:
+            label_d = QLabel("Taking into account your answers, you will have diabetes")
+        label_d.setFont(QFont("Arial", 11))
+        label_d.setAlignment(Qt.AlignCenter)
+        layout.addWidget(label_d)
+        
+        if self.results["Stroke"] == 0:
+            label_s = QLabel("Taking into account your answers, you won't suffer a stroke")
+        else:
+            label_s = QLabel("Taking into account your answers, you will suffer a stroke")
+        label_s.setFont(QFont("Arial", 11))
+        label_s.setAlignment(Qt.AlignCenter)
+        layout.addWidget(label_s)
+        
+        if self.results["Heart attack"] == 0:
+            label_ha = QLabel("Taking into account your answers, you won't suffer a heart attack")
+        else:
+            label_ha = QLabel("Taking into account your answers, you will suffer a heart attack")
+        label_ha.setFont(QFont("Arial", 11))
+        label_ha.setAlignment(Qt.AlignCenter)
+        layout.addWidget(label_ha)
+        
+        self.close_button = QPushButton("Close")
+        self.close_button.clicked.connect(self.close)
+        layout.addWidget(self.close_button)
+
+        self.setLayout(layout)
 
 class SurveyWindow(QWidget):
     answers_submitted = Signal(dict)
@@ -350,10 +396,16 @@ class MedPredictorApp(QWidget):
 
         self.setLayout(layout)
     
+    def display_results(self, results):
+        self.results_windows = ResultsWindow(results)
+        self.results_windows.show()  
+
     def make_model_predictions(self):
         if not hasattr(self, "model_predictions"):
             self.model_predictions = ModelPredictionsWindow()
             self.model_predictions.show()
+            if hasattr(self.model_predictions, "model_predictions_thread"):
+                self.model_predictions.model_predictions_thread.finished.connect(self.display_results)
 
     def train_model(self):
         if not hasattr(self, "training_model"):  
