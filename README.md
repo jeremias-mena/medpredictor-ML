@@ -9,7 +9,7 @@ This project implements Machine Learning models to predict the likelihood of a p
 The model takes into account several variables related to demographic factors 👥, dietary habits 🥗 and negative habits 🚬🍺, with the aim of providing a predictive analytical tool for health.
 
 ## 📊 Dataset
-The dataset used to carry out this project is available at [Kaggle] (https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset?select=diabetes_binary_health_indicators_BRFSS2015.csv). 
+The dataset used to carry out this project is available at [Kaggle](https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset?select=diabetes_binary_health_indicators_BRFSS2015.csv). 
 
 ## 📂 Project structure
 ```
