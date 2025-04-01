@@ -14,9 +14,6 @@ class Graph:
         self.xlabel_name = xlabel_name
         self.ylabel_name = ylabel_name
 
-    """
-    This method set up the config for a graph
-    """
     def graph_decorator(func):
             def wrapper(self, *args, **kwargs):
                 plt.figure(figsize=(Graph.width, Graph.height))
@@ -29,9 +26,6 @@ class Graph:
                 return result
             return wrapper
 
-    """
-    This method creates a bar plot with its features
-    """
     @graph_decorator
     def bar_plot_sns(self, x, y, data,**kwargs):
         sns.barplot(
@@ -46,9 +40,6 @@ class Graph:
         edgecolor=kwargs.get('edgecolor', 'black'))
         return
 
-    """
-    This method creates an histogram with its features
-    """
     @graph_decorator
     def hist_plot_sns(self, x, data, **kwargs):
         if (type(self.colors) != str):
