@@ -7,8 +7,8 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTENC
 
 def train_model_h1():
-    path_models = './src/models'
-    path_cod_data = './src/data_codified/enc_data.csv'
+    path_models = './models'
+    path_cod_data = './data_codified/enc_data.csv'
 
     Config().create_dir(dir_path=path_models)
 
@@ -35,8 +35,8 @@ def train_model_h1():
     return
 
 def train_model_h2():
-    path_models = './src/models'
-    path_cod_data = './src/data_codified/enc_data.csv'
+    path_models = './models'
+    path_cod_data = './data_codified/enc_data.csv'
     
     Config().create_dir(dir_path=path_models)
 
@@ -65,8 +65,8 @@ def train_model_h2():
     return
 
 def train_model_h3():
-    path_models = './src/models'
-    path_cod_data = './src/data_codified/enc_data.csv'
+    path_models = './models'
+    path_cod_data = './data_codified/enc_data.csv'
 
     Config().create_dir(dir_path=path_models)
 

@@ -30,11 +30,11 @@ class ProcessingDataWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Processing data")
         self.setGeometry(150, 150, 400, 200)
-        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+        self.setWindowIcon(QIcon("./static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
 
-        if not os.path.exists('./src/data_codified'): 
+        if not os.path.exists('./data_codified'): 
             self.title_label = QLabel("Processing data...")
             self.title_label.setAlignment(Qt.AlignCenter)
             layout.addWidget(self.title_label)
@@ -101,11 +101,11 @@ class TrainingModelWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Training Model")
         self.setGeometry(150, 150, 400, 200)
-        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+        self.setWindowIcon(QIcon("./static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
         
-        if not Config().check_files(path='./src/models'):
+        if not Config().check_files(path='./models'):
             self.title_label = QLabel("Training models...")
             self.title_label.setAlignment(Qt.AlignCenter)
             layout.addWidget(self.title_label)
@@ -171,7 +171,7 @@ class ModelPredictionsWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Making predictions")
         self.setGeometry(150, 150, 400, 200)
-        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+        self.setWindowIcon(QIcon("./static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
         
@@ -206,7 +206,7 @@ class ResultsWindow(QWidget):
 
         self.setWindowTitle("MedPredictor Results")
         self.setGeometry(150, 150, 400, 300)
-        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+        self.setWindowIcon(QIcon("./static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
 
@@ -254,7 +254,7 @@ class SurveyWindow(QWidget):
         super().__init__()
         self.setWindowTitle("MedPredictor Survey")
         self.setGeometry(100, 100, 400, 500)
-        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+        self.setWindowIcon(QIcon("./static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
 
@@ -362,7 +362,7 @@ class MedPredictorApp(QWidget):
         super().__init__()
         self.setWindowTitle("Medpredictor App")
         self.setGeometry(100, 100, 500, 400)
-        self.setWindowIcon(QIcon("./src/static/medpredictor_icon.png"))
+        self.setWindowIcon(QIcon("./static/medpredictor_icon.png"))
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)

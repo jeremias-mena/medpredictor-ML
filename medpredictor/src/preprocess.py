@@ -80,7 +80,7 @@ def data_encoder(df):
     return df_enc, df_dec
 
 def preprocess_answers(answers):
-    answers_path = './src/answers'
+    answers_path = './answers'
     Config().create_dir(dir_path=answers_path)
     answers.update({"Age": Utils().transform_age(answers["Age"])})
     df = pd.DataFrame({"HighBP": [answers["HighBP"]],
@@ -103,7 +103,7 @@ def preprocess_answers(answers):
     return
 
 def preprocess_data():
-    data_codified_path = './src/data_codified'
+    data_codified_path = './data_codified'
     Config().create_dir(dir_path=data_codified_path)
 
     df = pd.read_csv(Config.data_cleaned_path)
